@@ -19,47 +19,25 @@ namespace lab_8_2_registration_form
 
     public partial class MainWindow : Window
     {
-        string name, secondName, email, password1, password2;
-        int age;
-
-        
-
+        string name, secondName;
         public MainWindow()
         {
             InitializeComponent();
         }
-
-        
-
-        private void txtName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        private void txtSecondName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-        private void txtAge_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
-
-        private void txtPasswd_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
-        private void txtPasswdChek_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
+        private void txtName_TextChanged(object sender, TextChangedEventArgs e) { name = txtName.Text; }
+        private void txtSecondName_TextChanged(object sender, TextChangedEventArgs e){ secondName = txtSecondName.Text; }
+        private void txtAge_TextChanged(object sender, TextChangedEventArgs e) {}
+        private void txtPasswd_TextChanged(object sender, TextChangedEventArgs e) {}
+        private void txtPasswdChek_TextChanged(object sender, TextChangedEventArgs e) {}
+        private void cmbRole_SelectionChanged(object sender, SelectionChangedEventArgs e) {}
+        private void btnClear_Click(object sender, RoutedEventArgs e) { Clear(); }
         private void btnReg_Click(object sender, RoutedEventArgs e)
         {
             try
             {
                 if (!ValidateForm()) return;
-                MessageBox.Show("Данные сохранены!", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show($"Пользователь {name} {secondName} зарегистрирован." , "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                Clear();
 
             }
             catch (RegistrationException ex)
@@ -69,15 +47,14 @@ namespace lab_8_2_registration_form
             }
 
         }
-
-        private void cmbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        void Clear()
         {
-
-        }
-
-        private void btnClear_Click(object sender, RoutedEventArgs e)
-        {
-
+            txtName.Clear();
+            txtSecondName.Clear();
+            txtAge.Clear();
+            txtEmail.Clear();
+            txtPassword.Clear();
+            txtPasswordChek.Clear();
         }
         private bool ValidateForm()
         {
@@ -119,7 +96,6 @@ namespace lab_8_2_registration_form
             }
             return true; // все проверки пройдены
         }
-        
     }
     public class RegistrationException : Exception
     {
@@ -129,7 +105,5 @@ namespace lab_8_2_registration_form
         {
             FieldName = field;
         }
-
-
     }
 }
